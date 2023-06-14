@@ -26,7 +26,9 @@ override.tf.json
 
 # Credentials Files
 **/credentials.json
-**/*.json
+
+# Local testing variables
+*.tfvars
 
 /.idea/
 .DS_Store
