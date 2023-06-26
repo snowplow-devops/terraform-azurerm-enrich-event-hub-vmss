@@ -9,7 +9,7 @@ variable "resource_group_name" {
 }
 
 variable "subnet_id" {
-  description = "The subnet id to deploy the load balancer across"
+  description = "The subnet id to deploy the service into"
   type        = string
 }
 
@@ -20,7 +20,7 @@ variable "vm_sku" {
 }
 
 variable "vm_instance_count" {
-  description = "The instance type to use"
+  description = "The instance count to use"
   type        = number
   default     = 1
 }
@@ -68,6 +68,11 @@ variable "good_topic_name" {
 
 variable "bad_topic_name" {
   description = "The name of the bad Event Hubs topic that enrichment will insert failed data into"
+  type        = string
+}
+
+variable "eh_namespace_name" {
+  description = "The name of the Event Hubs namespace"
   type        = string
 }
 
