@@ -121,11 +121,22 @@ resource "azurerm_network_security_rule" "egress_tcp_custom" {
   network_security_group_name = azurerm_network_security_group.nsg.name
 }
 
+# --- EventHubs: Consumer Groups
+
+resource "azurerm_eventhub_consumer_group" "raw_topic" {
+  name = var.name
+
+  namespace_name      = var.eh_namespace_name
+  eventhub_name       = var.raw_topic_name
+  resource_group_name = var.resource_group_name
+}
+
 # --- Compute: VM scale-set deployment
 
 locals {
   hocon = templatefile("${path.module}/templates/config.hocon.tmpl", {
     raw_topic_name                            = var.raw_topic_name
+    raw_group_id                              = azurerm_eventhub_consumer_group.raw_topic.name
     good_topic_name                           = var.good_topic_name
     bad_topic_name                            = var.bad_topic_name
     eh_namespace_broker                       = var.eh_namespace_broker

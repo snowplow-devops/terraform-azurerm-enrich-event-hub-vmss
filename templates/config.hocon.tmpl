@@ -4,7 +4,7 @@
     "topicName": "${raw_topic_name}"
     "bootstrapServers": "${eh_namespace_broker}"
 
-    "consumerConf": {"security.protocol":"SASL_SSL","sasl.mechanism":"PLAIN","sasl.jaas.config":"org.apache.kafka.common.security.plain.PlainLoginModule required username=\"\$ConnectionString\" password=\"${eh_namespace_read_write_connection_string}\";"}
+    "consumerConf": {"group.id":"${raw_group_id}","security.protocol":"SASL_SSL","sasl.mechanism":"PLAIN","sasl.jaas.config":"org.apache.kafka.common.security.plain.PlainLoginModule required username=\"\$ConnectionString\" password=\"${eh_namespace_read_write_connection_string}\";"}
   }
   "output": {
     "good": {
