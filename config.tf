@@ -1,7 +1,7 @@
 locals {
   resolvers_raw = concat(var.default_iglu_resolvers, var.custom_iglu_resolvers)
 
-  resolvers_open = [
+  resolvers_public = [
     for resolver in local.resolvers_raw : merge(
       {
         name           = resolver["name"],
@@ -16,7 +16,7 @@ locals {
     ) if resolver["api_key"] == ""
   ]
 
-  resolvers_closed = [
+  resolvers_private = [
     for resolver in local.resolvers_raw : merge(
       {
         name           = resolver["name"],
@@ -33,8 +33,8 @@ locals {
   ]
 
   resolvers = flatten([
-    local.resolvers_open,
-    local.resolvers_closed
+    local.resolvers_public,
+    local.resolvers_private
   ])
 
   iglu_config = templatefile("${path.module}/templates/iglu_config.json.tmpl", { resolvers = jsonencode(local.resolvers) })
