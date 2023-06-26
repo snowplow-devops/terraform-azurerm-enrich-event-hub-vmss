@@ -69,12 +69,14 @@ module "enrich_event_hub" {
   resource_group_name = var.resource_group_name
   subnet_id           = var.subnet_id_for_servers
   
-  raw_topic_name                            = module.raw_eh_topic.name
-  good_topic_name                           = module.enriched_eh_topic.name
-  bad_topic_name                            = module.bad_1_eh_topic.name
-  eh_namespace_name                         = module.pipeline_eh_namespace.name
-  eh_namespace_broker                       = module.pipeline_eh_namespace.broker
-  eh_namespace_read_write_connection_string = module.pipeline_eh_namespace.read_write_primary_connection_string
+  raw_topic_name               = module.raw_eh_topic.name
+  raw_topic_connection_string  = module.raw_eh_topic.read_only_primary_connection_string
+  good_topic_name              = module.enriched_eh_topic.name
+  good_topic_connection_string = module.enriched_eh_topic.read_write_primary_connection_string
+  bad_topic_name               = module.bad_1_eh_topic.name
+  bad_topic_connection_string  = module.bad_1_eh_topic.read_write_primary_connection_string
+  eh_namespace_name            = module.pipeline_eh_namespace.name
+  eh_namespace_broker          = module.pipeline_eh_namespace.broker
 
   ssh_public_key   = "your-public-key-here"
   ssh_ip_allowlist = ["0.0.0.0/0"]
@@ -122,12 +124,14 @@ module "enrich_event_hub" {
   resource_group_name = var.resource_group_name
   subnet_id           = var.subnet_id_for_servers
   
-  raw_topic_name                            = module.raw_eh_topic.name
-  good_topic_name                           = module.enriched_eh_topic.name
-  bad_topic_name                            = module.bad_1_eh_topic.name
-  eh_namespace_name                         = module.pipeline_eh_namespace.name
-  eh_namespace_broker                       = module.pipeline_eh_namespace.broker
-  eh_namespace_read_write_connection_string = module.pipeline_eh_namespace.read_write_primary_connection_string
+  raw_topic_name               = module.raw_eh_topic.name
+  raw_topic_connection_string  = module.raw_eh_topic.read_only_primary_connection_string
+  good_topic_name              = module.enriched_eh_topic.name
+  good_topic_connection_string = module.enriched_eh_topic.read_write_primary_connection_string
+  bad_topic_name               = module.bad_1_eh_topic.name
+  bad_topic_connection_string  = module.bad_1_eh_topic.read_write_primary_connection_string
+  eh_namespace_name            = module.pipeline_eh_namespace.name
+  eh_namespace_broker          = module.pipeline_eh_namespace.broker
 
   ssh_public_key   = "your-public-key-here"
   ssh_ip_allowlist = ["0.0.0.0/0"]
@@ -174,12 +178,14 @@ module "enrich_event_hub" {
   resource_group_name = var.resource_group_name
   subnet_id           = var.subnet_id_for_servers
   
-  raw_topic_name                            = module.raw_eh_topic.name
-  good_topic_name                           = module.enriched_eh_topic.name
-  bad_topic_name                            = module.bad_1_eh_topic.name
-  eh_namespace_name                         = module.pipeline_eh_namespace.name
-  eh_namespace_broker                       = module.pipeline_eh_namespace.broker
-  eh_namespace_read_write_connection_string = module.pipeline_eh_namespace.read_write_primary_connection_string
+  raw_topic_name               = module.raw_eh_topic.name
+  raw_topic_connection_string  = module.raw_eh_topic.read_only_primary_connection_string
+  good_topic_name              = module.enriched_eh_topic.name
+  good_topic_connection_string = module.enriched_eh_topic.read_write_primary_connection_string
+  bad_topic_name               = module.bad_1_eh_topic.name
+  bad_topic_connection_string  = module.bad_1_eh_topic.read_write_primary_connection_string
+  eh_namespace_name            = module.pipeline_eh_namespace.name
+  eh_namespace_broker          = module.pipeline_eh_namespace.broker
 
   ssh_public_key   = "your-public-key-here"
   ssh_ip_allowlist = ["0.0.0.0/0"]
@@ -237,12 +243,14 @@ module "enrich_event_hub" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_bad_topic_connection_string"></a> [bad\_topic\_connection\_string](#input\_bad\_topic\_connection\_string) | The connection string to use for writing to the bad topic | `string` | n/a | yes |
 | <a name="input_bad_topic_name"></a> [bad\_topic\_name](#input\_bad\_topic\_name) | The name of the bad Event Hubs topic that enrichment will insert failed data into | `string` | n/a | yes |
 | <a name="input_eh_namespace_broker"></a> [eh\_namespace\_broker](#input\_eh\_namespace\_broker) | The broker to configure for access to the Event Hubs namespace | `string` | n/a | yes |
 | <a name="input_eh_namespace_name"></a> [eh\_namespace\_name](#input\_eh\_namespace\_name) | The name of the Event Hubs namespace | `string` | n/a | yes |
-| <a name="input_eh_namespace_read_write_connection_string"></a> [eh\_namespace\_read\_write\_connection\_string](#input\_eh\_namespace\_read\_write\_connection\_string) | The connection string to use for access to the Event Hubs namespace | `string` | n/a | yes |
+| <a name="input_good_topic_connection_string"></a> [good\_topic\_connection\_string](#input\_good\_topic\_connection\_string) | The connection string to use for writing to the good/enriched topic | `string` | n/a | yes |
 | <a name="input_good_topic_name"></a> [good\_topic\_name](#input\_good\_topic\_name) | The name of the good Event Hubs topic that enrichment will insert good data into | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | A name which will be pre-pended to the resources created | `string` | n/a | yes |
+| <a name="input_raw_topic_connection_string"></a> [raw\_topic\_connection\_string](#input\_raw\_topic\_connection\_string) | The connection string to use for reading from the raw topic | `string` | n/a | yes |
 | <a name="input_raw_topic_name"></a> [raw\_topic\_name](#input\_raw\_topic\_name) | The name of the raw Event Hubs topic that enrichment will pull data from | `string` | n/a | yes |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group to deploy the service into | `string` | n/a | yes |
 | <a name="input_ssh_public_key"></a> [ssh\_public\_key](#input\_ssh\_public\_key) | The SSH public key attached for access to the servers | `string` | n/a | yes |
