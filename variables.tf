@@ -61,13 +61,28 @@ variable "raw_topic_name" {
   type        = string
 }
 
+variable "raw_topic_connection_string" {
+  description = "The connection string to use for reading from the raw topic"
+  type        = string
+}
+
 variable "good_topic_name" {
   description = "The name of the good Event Hubs topic that enrichment will insert good data into"
   type        = string
 }
 
+variable "good_topic_connection_string" {
+  description = "The connection string to use for writing to the good/enriched topic"
+  type        = string
+}
+
 variable "bad_topic_name" {
   description = "The name of the bad Event Hubs topic that enrichment will insert failed data into"
+  type        = string
+}
+
+variable "bad_topic_connection_string" {
+  description = "The connection string to use for writing to the bad topic"
   type        = string
 }
 
@@ -78,11 +93,6 @@ variable "eh_namespace_name" {
 
 variable "eh_namespace_broker" {
   description = "The broker to configure for access to the Event Hubs namespace"
-  type        = string
-}
-
-variable "eh_namespace_read_write_connection_string" {
-  description = "The connection string to use for access to the Event Hubs namespace"
   type        = string
 }
 

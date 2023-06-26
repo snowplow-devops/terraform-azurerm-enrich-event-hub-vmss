@@ -135,12 +135,14 @@ resource "azurerm_eventhub_consumer_group" "raw_topic" {
 
 locals {
   hocon = templatefile("${path.module}/templates/config.hocon.tmpl", {
-    raw_topic_name                            = var.raw_topic_name
-    raw_group_id                              = azurerm_eventhub_consumer_group.raw_topic.name
-    good_topic_name                           = var.good_topic_name
-    bad_topic_name                            = var.bad_topic_name
-    eh_namespace_broker                       = var.eh_namespace_broker
-    eh_namespace_read_write_connection_string = var.eh_namespace_read_write_connection_string
+    raw_topic_name               = var.raw_topic_name
+    raw_group_id                 = azurerm_eventhub_consumer_group.raw_topic.name
+    raw_topic_connection_string  = var.raw_topic_connection_string
+    good_topic_name              = var.good_topic_name
+    good_topic_connection_string = var.good_topic_connection_string
+    bad_topic_name               = var.bad_topic_name
+    bad_topic_connection_string  = var.bad_topic_connection_string
+    eh_namespace_broker          = var.eh_namespace_broker
 
     assets_update_period = var.assets_update_period
 
