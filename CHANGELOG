@@ -1,3 +1,8 @@
+Version 0.1.1 (2023-06-26)
+--------------------------
+Add consumer_group to deployment (#3)
+Use topic specific keys for Kafka connections (#5)
+
 Version 0.1.0 (2023-06-14)
 --------------------------
 Add Enrich module (#2)
