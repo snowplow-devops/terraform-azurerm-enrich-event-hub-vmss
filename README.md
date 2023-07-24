@@ -29,7 +29,7 @@ By default this module enables 5 enrichments which you can find in the `template
 ```hcl
 module "pipeline_eh_namespace" {
   source  = "snowplow-devops/event-hub-namespace/azurerm"
-  version = "0.1.0"
+  version = "0.1.1"
 
   name                = "snowplow-pipeline"
   resource_group_name = var.resource_group_name
@@ -37,7 +37,7 @@ module "pipeline_eh_namespace" {
 
 module "raw_eh_topic" {
   source  = "snowplow-devops/event-hub/azurerm"
-  version = "0.1.0"
+  version = "0.1.1"
 
   name                = "raw-topic"
   namespace_name      = module.pipeline_eh_namespace.name
@@ -46,7 +46,7 @@ module "raw_eh_topic" {
 
 module "bad_1_eh_topic" {
   source  = "snowplow-devops/event-hub/azurerm"
-  version = "0.1.0"
+  version = "0.1.1"
 
   name                = "bad-1-topic"
   namespace_name      = module.pipeline_eh_namespace.name
@@ -55,7 +55,7 @@ module "bad_1_eh_topic" {
 
 module "enriched_eh_topic" {
   source  = "snowplow-devops/event-hub/azurerm"
-  version = "0.1.0"
+  version = "0.1.1"
 
   name                = "enriched-topic"
   namespace_name      = module.pipeline_eh_namespace.name
@@ -223,7 +223,7 @@ module "enrich_event_hub" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_service"></a> [service](#module\_service) | snowplow-devops/service-vmss/azurerm | 0.1.0 |
+| <a name="module_service"></a> [service](#module\_service) | snowplow-devops/service-vmss/azurerm | 0.1.1 |
 | <a name="module_telemetry"></a> [telemetry](#module\_telemetry) | snowplow-devops/telemetry/snowplow | 0.5.0 |
 
 ## Resources
@@ -255,6 +255,7 @@ module "enrich_event_hub" {
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group to deploy the service into | `string` | n/a | yes |
 | <a name="input_ssh_public_key"></a> [ssh\_public\_key](#input\_ssh\_public\_key) | The SSH public key attached for access to the servers | `string` | n/a | yes |
 | <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | The subnet id to deploy the service into | `string` | n/a | yes |
+| <a name="input_app_version"></a> [app\_version](#input\_app\_version) | App version to use. This variable facilitates dev flow, the modules may not work with anything other than the default value. | `string` | `"3.8.0"` | no |
 | <a name="input_assets_update_period"></a> [assets\_update\_period](#input\_assets\_update\_period) | Period after which enrich assets should be checked for updates (e.g. MaxMind DB) | `string` | `"7 days"` | no |
 | <a name="input_associate_public_ip_address"></a> [associate\_public\_ip\_address](#input\_associate\_public\_ip\_address) | Whether to assign a public ip address to this instance | `bool` | `true` | no |
 | <a name="input_custom_iglu_resolvers"></a> [custom\_iglu\_resolvers](#input\_custom\_iglu\_resolvers) | The custom Iglu Resolvers that will be used by Enrichment to resolve and validate events | <pre>list(object({<br>    name            = string<br>    priority        = number<br>    uri             = string<br>    api_key         = string<br>    vendor_prefixes = list(string)<br>  }))</pre> | `[]` | no |
@@ -276,7 +277,7 @@ module "enrich_event_hub" {
 | <a name="input_enrichment_ua_parser_config"></a> [enrichment\_ua\_parser\_config](#input\_enrichment\_ua\_parser\_config) | n/a | `string` | `""` | no |
 | <a name="input_enrichment_weather_enrichment_config"></a> [enrichment\_weather\_enrichment\_config](#input\_enrichment\_weather\_enrichment\_config) | n/a | `string` | `""` | no |
 | <a name="input_enrichment_yauaa_enrichment_config"></a> [enrichment\_yauaa\_enrichment\_config](#input\_enrichment\_yauaa\_enrichment\_config) | n/a | `string` | `""` | no |
-| <a name="input_java_opts"></a> [java\_opts](#input\_java\_opts) | Custom JAVA Options | `string` | `"-Dorg.slf4j.simpleLogger.defaultLogLevel=info -XX:MinRAMPercentage=50 -XX:MaxRAMPercentage=75"` | no |
+| <a name="input_java_opts"></a> [java\_opts](#input\_java\_opts) | Custom JAVA Options | `string` | `"-XX:InitialRAMPercentage=75 -XX:MaxRAMPercentage=75"` | no |
 | <a name="input_ssh_ip_allowlist"></a> [ssh\_ip\_allowlist](#input\_ssh\_ip\_allowlist) | The comma-seperated list of CIDR ranges to allow SSH traffic from | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | The tags to append to this resource | `map(string)` | `{}` | no |
 | <a name="input_telemetry_enabled"></a> [telemetry\_enabled](#input\_telemetry\_enabled) | Whether or not to send telemetry information back to Snowplow Analytics Ltd | `bool` | `true` | no |
