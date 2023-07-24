@@ -24,6 +24,9 @@ override.tf.json
 *_override.tf
 *_override.tf.json
 
+*.test.tf
+*.test
+
 # Credentials Files
 **/credentials.json
 
