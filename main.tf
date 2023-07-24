@@ -3,7 +3,7 @@ locals {
   module_version = "0.1.1"
 
   app_name    = "enrich-kafka"
-  app_version = "3.8.0"
+  app_version = var.app_version
 
   local_tags = {
     Name           = var.name
@@ -157,7 +157,7 @@ locals {
   })
 
   user_data = templatefile("${path.module}/templates/user-data.sh.tmpl", {
-    config          = local.hocon
+    config_b64      = base64encode(local.hocon)
     version         = local.app_version
     iglu_config_b64 = base64encode(local.iglu_config)
     enrichments_b64 = base64encode(local.enrichments)
@@ -170,7 +170,7 @@ locals {
 
 module "service" {
   source  = "snowplow-devops/service-vmss/azurerm"
-  version = "0.1.0"
+  version = "0.1.1"
 
   user_supplied_script = local.user_data
   name                 = var.name
