@@ -8,6 +8,12 @@ variable "resource_group_name" {
   type        = string
 }
 
+variable "app_version" {
+  description = "App version to use. This variable facilitates dev flow, the modules may not work with anything other than the default value."
+  type        = string
+  default     = "3.8.0"
+}
+
 variable "subnet_id" {
   description = "The subnet id to deploy the service into"
   type        = string
@@ -50,7 +56,7 @@ variable "tags" {
 
 variable "java_opts" {
   description = "Custom JAVA Options"
-  default     = "-Dorg.slf4j.simpleLogger.defaultLogLevel=info -XX:MinRAMPercentage=50 -XX:MaxRAMPercentage=75"
+  default     = "-XX:InitialRAMPercentage=75 -XX:MaxRAMPercentage=75"
   type        = string
 }
 
