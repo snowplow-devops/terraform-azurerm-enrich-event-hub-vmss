@@ -1,6 +1,6 @@
 locals {
   module_name    = "enrich-event-hub-vmss"
-  module_version = "0.1.2"
+  module_version = "0.2.0"
 
   app_name    = "enrich-kafka"
   app_version = var.app_version
