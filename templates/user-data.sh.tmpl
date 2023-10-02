@@ -21,6 +21,9 @@ sudo docker run \
   --mount type=bind,source=$${CONFIG_DIR},target=/snowplow/config \
   --env JDK_JAVA_OPTIONS='${java_opts}' \
   --env INSTANCE_ID=$(get_instance_id) \
+  --env CONSUMER_CLIENT_ID="$${HOSTNAME}" \
+  --env PRODUCER_BAD_CLIENT_ID="$${HOSTNAME}-bad" \
+  --env PRODUCER_ENRICHED_CLIENT_ID="$${HOSTNAME}-enriched" \
   snowplow/snowplow-enrich-kafka:${version} \
   --config /snowplow/config/enrich.hocon \
   --iglu-config /snowplow/config/iglu_config.json \
