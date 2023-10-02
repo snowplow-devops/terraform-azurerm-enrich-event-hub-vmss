@@ -63,7 +63,6 @@ module "vnet" {
   depends_on = [azurerm_resource_group.rg]
 }
 
-
 module "enrich_service" {
   source = "../.."
 
@@ -72,14 +71,14 @@ module "enrich_service" {
 
   subnet_id = lookup(module.vnet.vnet_subnets_name_id, "pipeline1")
 
-  raw_topic_name               = module.raw_eh_topic.name
-  raw_topic_connection_string  = module.raw_eh_topic.read_only_primary_connection_string
-  good_topic_name              = module.enriched_eh_topic.name
-  good_topic_connection_string = module.enriched_eh_topic.read_write_primary_connection_string
-  bad_topic_name               = module.bad_1_eh_topic.name
-  bad_topic_connection_string  = module.bad_1_eh_topic.read_write_primary_connection_string
-  eh_namespace_name            = module.pipeline_eh_namespace.name
-  eh_namespace_broker          = module.pipeline_eh_namespace.broker
+  raw_topic_name            = module.raw_eh_topic.name
+  raw_topic_kafka_password  = module.raw_eh_topic.read_only_primary_connection_string
+  good_topic_name           = module.enriched_eh_topic.name
+  good_topic_kafka_password = module.enriched_eh_topic.read_write_primary_connection_string
+  bad_topic_name            = module.bad_1_eh_topic.name
+  bad_topic_kafka_password  = module.bad_1_eh_topic.read_write_primary_connection_string
+  eh_namespace_name         = module.pipeline_eh_namespace.name
+  kafka_brokers             = module.pipeline_eh_namespace.broker
 
   ssh_public_key   = local.ssh_public_key
   ssh_ip_allowlist = ["0.0.0.0/0"]

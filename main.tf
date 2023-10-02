@@ -124,6 +124,8 @@ resource "azurerm_network_security_rule" "egress_tcp_custom" {
 # --- EventHubs: Consumer Groups
 
 resource "azurerm_eventhub_consumer_group" "raw_topic" {
+  count = var.eh_namespace_name != "" ? 1 : 0
+
   name = var.name
 
   namespace_name      = var.eh_namespace_name
@@ -135,14 +137,17 @@ resource "azurerm_eventhub_consumer_group" "raw_topic" {
 
 locals {
   hocon = templatefile("${path.module}/templates/config.hocon.tmpl", {
-    raw_topic_name               = var.raw_topic_name
-    raw_group_id                 = azurerm_eventhub_consumer_group.raw_topic.name
-    raw_topic_connection_string  = var.raw_topic_connection_string
-    good_topic_name              = var.good_topic_name
-    good_topic_connection_string = var.good_topic_connection_string
-    bad_topic_name               = var.bad_topic_name
-    bad_topic_connection_string  = var.bad_topic_connection_string
-    eh_namespace_broker          = var.eh_namespace_broker
+    raw_topic_name            = var.raw_topic_name
+    raw_group_id              = coalesce(join("", azurerm_eventhub_consumer_group.raw_topic.*.name), var.name)
+    raw_topic_kafka_username  = var.raw_topic_kafka_username
+    raw_topic_kafka_password  = var.raw_topic_kafka_password
+    good_topic_name           = var.good_topic_name
+    good_topic_kafka_username = var.good_topic_kafka_username
+    good_topic_kafka_password = var.good_topic_kafka_password
+    bad_topic_name            = var.bad_topic_name
+    bad_topic_kafka_username  = var.bad_topic_kafka_username
+    bad_topic_kafka_password  = var.bad_topic_kafka_password
+    kafka_brokers             = var.kafka_brokers
 
     assets_update_period = var.assets_update_period
 

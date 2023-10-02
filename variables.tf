@@ -63,42 +63,61 @@ variable "java_opts" {
 # --- Configuration options
 
 variable "raw_topic_name" {
-  description = "The name of the raw Event Hubs topic that enrichment will pull data from"
+  description = "The name of the raw Kafka topic that enrichment will pull data from"
   type        = string
 }
 
-variable "raw_topic_connection_string" {
-  description = "The connection string to use for reading from the raw topic"
+variable "raw_topic_kafka_username" {
+  description = "Username for connection to Kafka cluster under PlainLoginModule (default: '$ConnectionString' which is used for EventHubs)"
+  type        = string
+  default     = "$ConnectionString"
+}
+
+variable "raw_topic_kafka_password" {
+  description = "Password for connection to Kafka cluster under PlainLoginModule (note: as default the EventHubs topic connection string for reading is expected)"
   type        = string
 }
 
 variable "good_topic_name" {
-  description = "The name of the good Event Hubs topic that enrichment will insert good data into"
+  description = "The name of the good Kafka topic that enrichment will insert good data into"
   type        = string
 }
 
-variable "good_topic_connection_string" {
-  description = "The connection string to use for writing to the good/enriched topic"
+variable "good_topic_kafka_username" {
+  description = "Username for connection to Kafka cluster under PlainLoginModule (default: '$ConnectionString' which is used for EventHubs)"
+  type        = string
+  default     = "$ConnectionString"
+}
+
+variable "good_topic_kafka_password" {
+  description = "Password for connection to Kafka cluster under PlainLoginModule (note: as default the EventHubs topic connection string for writing is expected)"
   type        = string
 }
 
 variable "bad_topic_name" {
-  description = "The name of the bad Event Hubs topic that enrichment will insert failed data into"
+  description = "The name of the bad Kafka topic that enrichment will insert failed data into"
   type        = string
 }
 
-variable "bad_topic_connection_string" {
-  description = "The connection string to use for writing to the bad topic"
+variable "bad_topic_kafka_username" {
+  description = "Username for connection to Kafka cluster under PlainLoginModule (default: '$ConnectionString' which is used for EventHubs)"
+  type        = string
+  default     = "$ConnectionString"
+}
+
+variable "bad_topic_kafka_password" {
+  description = "Password for connection to Kafka cluster under PlainLoginModule (note: as default the EventHubs topic connection string for writing is expected)"
   type        = string
 }
 
 variable "eh_namespace_name" {
-  description = "The name of the Event Hubs namespace"
+  description = "The name of the Event Hubs namespace (note: if you are not using EventHubs leave this blank)"
   type        = string
+  default     = ""
 }
 
-variable "eh_namespace_broker" {
-  description = "The broker to configure for access to the Event Hubs namespace"
+variable "kafka_brokers" {
+  description = "The brokers to configure for access to the Kafka Cluster (note: as default the EventHubs namespace broker)"
   type        = string
 }
 

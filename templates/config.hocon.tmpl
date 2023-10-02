@@ -2,24 +2,24 @@
   "input": {
     "type": "Kafka"
     "topicName": "${raw_topic_name}"
-    "bootstrapServers": "${eh_namespace_broker}"
+    "bootstrapServers": "${kafka_brokers}"
 
-    "consumerConf": {"group.id":"${raw_group_id}","security.protocol":"SASL_SSL","sasl.mechanism":"PLAIN","sasl.jaas.config":"org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${raw_topic_connection_string}\";"}
+    "consumerConf": {"client.id":$${CONSUMER_CLIENT_ID},"group.id":"${raw_group_id}","security.protocol":"SASL_SSL","sasl.mechanism":"PLAIN","sasl.jaas.config":"org.apache.kafka.common.security.plain.PlainLoginModule required username=\"${raw_topic_kafka_username}\" password=\"${raw_topic_kafka_password}\";"}
   }
   "output": {
     "good": {
       "type": "Kafka"
       "topicName": "${good_topic_name}"
-      "bootstrapServers": "${eh_namespace_broker}"
+      "bootstrapServers": "${kafka_brokers}"
 
-      "producerConf": {"security.protocol":"SASL_SSL","sasl.mechanism":"PLAIN","sasl.jaas.config":"org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${good_topic_connection_string}\";"}
+      "producerConf": {"client.id":$${PRODUCER_ENRICHED_CLIENT_ID},"security.protocol":"SASL_SSL","sasl.mechanism":"PLAIN","sasl.jaas.config":"org.apache.kafka.common.security.plain.PlainLoginModule required username=\"${good_topic_kafka_username}\" password=\"${good_topic_kafka_password}\";"}
     }
     "bad": {
       "type": "Kafka"
       "topicName": "${bad_topic_name}"
-      "bootstrapServers": "${eh_namespace_broker}"
+      "bootstrapServers": "${kafka_brokers}"
 
-      "producerConf": {"security.protocol":"SASL_SSL","sasl.mechanism":"PLAIN","sasl.jaas.config":"org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${bad_topic_connection_string}\";"}
+      "producerConf": {"client.id":$${PRODUCER_BAD_CLIENT_ID},"security.protocol":"SASL_SSL","sasl.mechanism":"PLAIN","sasl.jaas.config":"org.apache.kafka.common.security.plain.PlainLoginModule required username=\"${bad_topic_kafka_username}\" password=\"${bad_topic_kafka_password}\";"}
     }
   }
 

@@ -69,14 +69,14 @@ module "enrich_event_hub" {
   resource_group_name = var.resource_group_name
   subnet_id           = var.subnet_id_for_servers
   
-  raw_topic_name               = module.raw_eh_topic.name
-  raw_topic_connection_string  = module.raw_eh_topic.read_only_primary_connection_string
-  good_topic_name              = module.enriched_eh_topic.name
-  good_topic_connection_string = module.enriched_eh_topic.read_write_primary_connection_string
-  bad_topic_name               = module.bad_1_eh_topic.name
-  bad_topic_connection_string  = module.bad_1_eh_topic.read_write_primary_connection_string
-  eh_namespace_name            = module.pipeline_eh_namespace.name
-  eh_namespace_broker          = module.pipeline_eh_namespace.broker
+  raw_topic_name            = module.raw_eh_topic.name
+  raw_topic_kafka_password  = module.raw_eh_topic.read_only_primary_connection_string
+  good_topic_name           = module.enriched_eh_topic.name
+  good_topic_kafka_password = module.enriched_eh_topic.read_write_primary_connection_string
+  bad_topic_name            = module.bad_1_eh_topic.name
+  bad_topic_kafka_password  = module.bad_1_eh_topic.read_write_primary_connection_string
+  eh_namespace_name         = module.pipeline_eh_namespace.name
+  kafka_brokers             = module.pipeline_eh_namespace.broker
 
   ssh_public_key   = "your-public-key-here"
   ssh_ip_allowlist = ["0.0.0.0/0"]
@@ -124,14 +124,14 @@ module "enrich_event_hub" {
   resource_group_name = var.resource_group_name
   subnet_id           = var.subnet_id_for_servers
   
-  raw_topic_name               = module.raw_eh_topic.name
-  raw_topic_connection_string  = module.raw_eh_topic.read_only_primary_connection_string
-  good_topic_name              = module.enriched_eh_topic.name
-  good_topic_connection_string = module.enriched_eh_topic.read_write_primary_connection_string
-  bad_topic_name               = module.bad_1_eh_topic.name
-  bad_topic_connection_string  = module.bad_1_eh_topic.read_write_primary_connection_string
-  eh_namespace_name            = module.pipeline_eh_namespace.name
-  eh_namespace_broker          = module.pipeline_eh_namespace.broker
+  raw_topic_name            = module.raw_eh_topic.name
+  raw_topic_kafka_password  = module.raw_eh_topic.read_only_primary_connection_string
+  good_topic_name           = module.enriched_eh_topic.name
+  good_topic_kafka_password = module.enriched_eh_topic.read_write_primary_connection_string
+  bad_topic_name            = module.bad_1_eh_topic.name
+  bad_topic_kafka_password  = module.bad_1_eh_topic.read_write_primary_connection_string
+  eh_namespace_name         = module.pipeline_eh_namespace.name
+  kafka_brokers             = module.pipeline_eh_namespace.broker
 
   ssh_public_key   = "your-public-key-here"
   ssh_ip_allowlist = ["0.0.0.0/0"]
@@ -178,14 +178,14 @@ module "enrich_event_hub" {
   resource_group_name = var.resource_group_name
   subnet_id           = var.subnet_id_for_servers
   
-  raw_topic_name               = module.raw_eh_topic.name
-  raw_topic_connection_string  = module.raw_eh_topic.read_only_primary_connection_string
-  good_topic_name              = module.enriched_eh_topic.name
-  good_topic_connection_string = module.enriched_eh_topic.read_write_primary_connection_string
-  bad_topic_name               = module.bad_1_eh_topic.name
-  bad_topic_connection_string  = module.bad_1_eh_topic.read_write_primary_connection_string
-  eh_namespace_name            = module.pipeline_eh_namespace.name
-  eh_namespace_broker          = module.pipeline_eh_namespace.broker
+  raw_topic_name            = module.raw_eh_topic.name
+  raw_topic_kafka_password  = module.raw_eh_topic.read_only_primary_connection_string
+  good_topic_name           = module.enriched_eh_topic.name
+  good_topic_kafka_password = module.enriched_eh_topic.read_write_primary_connection_string
+  bad_topic_name            = module.bad_1_eh_topic.name
+  bad_topic_kafka_password  = module.bad_1_eh_topic.read_write_primary_connection_string
+  eh_namespace_name         = module.pipeline_eh_namespace.name
+  kafka_brokers             = module.pipeline_eh_namespace.broker
 
   ssh_public_key   = "your-public-key-here"
   ssh_ip_allowlist = ["0.0.0.0/0"]
@@ -243,24 +243,25 @@ module "enrich_event_hub" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_bad_topic_connection_string"></a> [bad\_topic\_connection\_string](#input\_bad\_topic\_connection\_string) | The connection string to use for writing to the bad topic | `string` | n/a | yes |
-| <a name="input_bad_topic_name"></a> [bad\_topic\_name](#input\_bad\_topic\_name) | The name of the bad Event Hubs topic that enrichment will insert failed data into | `string` | n/a | yes |
-| <a name="input_eh_namespace_broker"></a> [eh\_namespace\_broker](#input\_eh\_namespace\_broker) | The broker to configure for access to the Event Hubs namespace | `string` | n/a | yes |
-| <a name="input_eh_namespace_name"></a> [eh\_namespace\_name](#input\_eh\_namespace\_name) | The name of the Event Hubs namespace | `string` | n/a | yes |
-| <a name="input_good_topic_connection_string"></a> [good\_topic\_connection\_string](#input\_good\_topic\_connection\_string) | The connection string to use for writing to the good/enriched topic | `string` | n/a | yes |
-| <a name="input_good_topic_name"></a> [good\_topic\_name](#input\_good\_topic\_name) | The name of the good Event Hubs topic that enrichment will insert good data into | `string` | n/a | yes |
+| <a name="input_bad_topic_kafka_password"></a> [bad\_topic\_kafka\_password](#input\_bad\_topic\_kafka\_password) | Password for connection to Kafka cluster under PlainLoginModule (note: as default the EventHubs topic connection string for writing is expected) | `string` | n/a | yes |
+| <a name="input_bad_topic_name"></a> [bad\_topic\_name](#input\_bad\_topic\_name) | The name of the bad Kafka topic that enrichment will insert failed data into | `string` | n/a | yes |
+| <a name="input_good_topic_kafka_password"></a> [good\_topic\_kafka\_password](#input\_good\_topic\_kafka\_password) | Password for connection to Kafka cluster under PlainLoginModule (note: as default the EventHubs topic connection string for writing is expected) | `string` | n/a | yes |
+| <a name="input_good_topic_name"></a> [good\_topic\_name](#input\_good\_topic\_name) | The name of the good Kafka topic that enrichment will insert good data into | `string` | n/a | yes |
+| <a name="input_kafka_brokers"></a> [kafka\_brokers](#input\_kafka\_brokers) | The brokers to configure for access to the Kafka Cluster (note: as default the EventHubs namespace broker) | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | A name which will be pre-pended to the resources created | `string` | n/a | yes |
-| <a name="input_raw_topic_connection_string"></a> [raw\_topic\_connection\_string](#input\_raw\_topic\_connection\_string) | The connection string to use for reading from the raw topic | `string` | n/a | yes |
-| <a name="input_raw_topic_name"></a> [raw\_topic\_name](#input\_raw\_topic\_name) | The name of the raw Event Hubs topic that enrichment will pull data from | `string` | n/a | yes |
+| <a name="input_raw_topic_kafka_password"></a> [raw\_topic\_kafka\_password](#input\_raw\_topic\_kafka\_password) | Password for connection to Kafka cluster under PlainLoginModule (note: as default the EventHubs topic connection string for reading is expected) | `string` | n/a | yes |
+| <a name="input_raw_topic_name"></a> [raw\_topic\_name](#input\_raw\_topic\_name) | The name of the raw Kafka topic that enrichment will pull data from | `string` | n/a | yes |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group to deploy the service into | `string` | n/a | yes |
 | <a name="input_ssh_public_key"></a> [ssh\_public\_key](#input\_ssh\_public\_key) | The SSH public key attached for access to the servers | `string` | n/a | yes |
 | <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | The subnet id to deploy the service into | `string` | n/a | yes |
 | <a name="input_app_version"></a> [app\_version](#input\_app\_version) | App version to use. This variable facilitates dev flow, the modules may not work with anything other than the default value. | `string` | `"3.8.0"` | no |
 | <a name="input_assets_update_period"></a> [assets\_update\_period](#input\_assets\_update\_period) | Period after which enrich assets should be checked for updates (e.g. MaxMind DB) | `string` | `"7 days"` | no |
 | <a name="input_associate_public_ip_address"></a> [associate\_public\_ip\_address](#input\_associate\_public\_ip\_address) | Whether to assign a public ip address to this instance | `bool` | `true` | no |
+| <a name="input_bad_topic_kafka_username"></a> [bad\_topic\_kafka\_username](#input\_bad\_topic\_kafka\_username) | Username for connection to Kafka cluster under PlainLoginModule (default: '$ConnectionString' which is used for EventHubs) | `string` | `"$ConnectionString"` | no |
 | <a name="input_custom_iglu_resolvers"></a> [custom\_iglu\_resolvers](#input\_custom\_iglu\_resolvers) | The custom Iglu Resolvers that will be used by Enrichment to resolve and validate events | <pre>list(object({<br>    name            = string<br>    priority        = number<br>    uri             = string<br>    api_key         = string<br>    vendor_prefixes = list(string)<br>  }))</pre> | `[]` | no |
 | <a name="input_custom_tcp_egress_port_list"></a> [custom\_tcp\_egress\_port\_list](#input\_custom\_tcp\_egress\_port\_list) | For opening up TCP ports to access other destinations not served over HTTP(s) (e.g. for SQL / API enrichments) | <pre>list(object({<br>    priority = number<br>    port     = number<br>  }))</pre> | `[]` | no |
 | <a name="input_default_iglu_resolvers"></a> [default\_iglu\_resolvers](#input\_default\_iglu\_resolvers) | The default Iglu Resolvers that will be used by Enrichment to resolve and validate events | <pre>list(object({<br>    name            = string<br>    priority        = number<br>    uri             = string<br>    api_key         = string<br>    vendor_prefixes = list(string)<br>  }))</pre> | <pre>[<br>  {<br>    "api_key": "",<br>    "name": "Iglu Central",<br>    "priority": 10,<br>    "uri": "http://iglucentral.com",<br>    "vendor_prefixes": []<br>  },<br>  {<br>    "api_key": "",<br>    "name": "Iglu Central - Mirror 01",<br>    "priority": 20,<br>    "uri": "http://mirror01.iglucentral.com",<br>    "vendor_prefixes": []<br>  }<br>]</pre> | no |
+| <a name="input_eh_namespace_name"></a> [eh\_namespace\_name](#input\_eh\_namespace\_name) | The name of the Event Hubs namespace (note: if you are not using EventHubs leave this blank) | `string` | `""` | no |
 | <a name="input_enrichment_anon_ip"></a> [enrichment\_anon\_ip](#input\_enrichment\_anon\_ip) | n/a | `string` | `""` | no |
 | <a name="input_enrichment_api_request_enrichment_config"></a> [enrichment\_api\_request\_enrichment\_config](#input\_enrichment\_api\_request\_enrichment\_config) | n/a | `string` | `""` | no |
 | <a name="input_enrichment_campaign_attribution"></a> [enrichment\_campaign\_attribution](#input\_enrichment\_campaign\_attribution) | n/a | `string` | `""` | no |
@@ -277,7 +278,9 @@ module "enrich_event_hub" {
 | <a name="input_enrichment_ua_parser_config"></a> [enrichment\_ua\_parser\_config](#input\_enrichment\_ua\_parser\_config) | n/a | `string` | `""` | no |
 | <a name="input_enrichment_weather_enrichment_config"></a> [enrichment\_weather\_enrichment\_config](#input\_enrichment\_weather\_enrichment\_config) | n/a | `string` | `""` | no |
 | <a name="input_enrichment_yauaa_enrichment_config"></a> [enrichment\_yauaa\_enrichment\_config](#input\_enrichment\_yauaa\_enrichment\_config) | n/a | `string` | `""` | no |
+| <a name="input_good_topic_kafka_username"></a> [good\_topic\_kafka\_username](#input\_good\_topic\_kafka\_username) | Username for connection to Kafka cluster under PlainLoginModule (default: '$ConnectionString' which is used for EventHubs) | `string` | `"$ConnectionString"` | no |
 | <a name="input_java_opts"></a> [java\_opts](#input\_java\_opts) | Custom JAVA Options | `string` | `"-XX:InitialRAMPercentage=75 -XX:MaxRAMPercentage=75"` | no |
+| <a name="input_raw_topic_kafka_username"></a> [raw\_topic\_kafka\_username](#input\_raw\_topic\_kafka\_username) | Username for connection to Kafka cluster under PlainLoginModule (default: '$ConnectionString' which is used for EventHubs) | `string` | `"$ConnectionString"` | no |
 | <a name="input_ssh_ip_allowlist"></a> [ssh\_ip\_allowlist](#input\_ssh\_ip\_allowlist) | The comma-seperated list of CIDR ranges to allow SSH traffic from | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | The tags to append to this resource | `map(string)` | `{}` | no |
 | <a name="input_telemetry_enabled"></a> [telemetry\_enabled](#input\_telemetry\_enabled) | Whether or not to send telemetry information back to Snowplow Analytics Ltd | `bool` | `true` | no |
