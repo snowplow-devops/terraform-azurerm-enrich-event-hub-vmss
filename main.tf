@@ -1,5 +1,7 @@
 locals {
-  module_name    = "enrich-event-hub-vmss"
+  module_name_suffix = var.kafka_source == "azure_event_hubs" ? "" : ":${var.kafka_source}"
+
+  module_name    = "enrich-event-hub-vmss${local.module_name_suffix}"
   module_version = "0.2.0"
 
   app_name    = "enrich-kafka"
