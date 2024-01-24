@@ -20,6 +20,7 @@ sudo docker run \
   --log-opt max-file=5 \
   --mount type=bind,source=$${CONFIG_DIR},target=/snowplow/config \
   --env JDK_JAVA_OPTIONS='${java_opts}' \
+  --env ACCEPT_LIMITED_USE_LICENSE=${accept_limited_use_license} \
   --env INSTANCE_ID=$(get_instance_id) \
   --env CONSUMER_CLIENT_ID="$${HOSTNAME}" \
   --env PRODUCER_BAD_CLIENT_ID="$${HOSTNAME}-bad" \
