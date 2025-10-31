@@ -22,7 +22,7 @@ variable "resource_group_name" {
 variable "app_version" {
   description = "App version to use. This variable facilitates dev flow, the modules may not work with anything other than the default value."
   type        = string
-  default     = "3.9.0"
+  default     = "6.2.1"
 }
 
 variable "subnet_id" {

@@ -1,6 +1,5 @@
 {
   "input": {
-    "type": "Kafka"
     "topicName": "${raw_topic_name}"
     "bootstrapServers": "${kafka_brokers}"
 
@@ -8,14 +7,12 @@
   }
   "output": {
     "good": {
-      "type": "Kafka"
       "topicName": "${good_topic_name}"
       "bootstrapServers": "${kafka_brokers}"
 
       "producerConf": {"client.id":$${PRODUCER_ENRICHED_CLIENT_ID},"security.protocol":"SASL_SSL","sasl.mechanism":"PLAIN","sasl.jaas.config":"org.apache.kafka.common.security.plain.PlainLoginModule required username=\"${good_topic_kafka_username}\" password=\"${good_topic_kafka_password}\";"}
     }
     "bad": {
-      "type": "Kafka"
       "topicName": "${bad_topic_name}"
       "bootstrapServers": "${kafka_brokers}"
 
@@ -45,9 +42,5 @@
     "moduleName": "${telemetry_module_name}"
     "moduleVersion": "${telemetry_module_version}"
     "instanceId": $${INSTANCE_ID}
-  }
-
-  "featureFlags" : {
-    "acceptInvalid": false
   }
 }
