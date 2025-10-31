@@ -27,7 +27,7 @@ data "azurerm_resource_group" "rg" {
 
 module "telemetry" {
   source  = "snowplow-devops/telemetry/snowplow"
-  version = "0.5.0"
+  version = "0.6.2"
 
   count = var.telemetry_enabled ? 1 : 0
 
@@ -170,7 +170,7 @@ locals {
     version           = local.app_version
     iglu_resolver_b64 = base64encode(local.iglu_resolver)
 
-    telemetry_script = join("", module.telemetry.*.azurerm_ubuntu_22_04_user_data)
+    telemetry_script = join("", module.telemetry.*.azurerm_ubuntu_24_04_user_data)
 
     java_opts = var.java_opts
 
@@ -195,7 +195,7 @@ locals {
 
 module "service" {
   source  = "snowplow-devops/service-vmss/azurerm"
-  version = "0.1.1"
+  version = "0.2.0"
 
   user_supplied_script = local.user_data
   name                 = var.name
