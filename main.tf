@@ -27,7 +27,7 @@ data "azurerm_resource_group" "rg" {
 
 module "telemetry" {
   source  = "snowplow-devops/telemetry/snowplow"
-  version = "0.6.2"
+  version = "0.6.3"
 
   count = var.telemetry_enabled ? 1 : 0
 
