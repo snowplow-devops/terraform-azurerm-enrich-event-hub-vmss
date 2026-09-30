@@ -195,7 +195,7 @@ locals {
 
 module "service" {
   source  = "snowplow-devops/service-vmss/azurerm"
-  version = "0.2.0"
+  version = "0.2.1"
 
   user_supplied_script = local.user_data
   name                 = var.name
