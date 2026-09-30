@@ -4,6 +4,7 @@ Update GitHub Actions to Node 24 and pin to commit SHAs
 Bump snowplow-devops/telemetry/snowplow module to 0.6.3
 Pin azurerm to ~> 4.27.0
 Bump snowplow-devops/service-vmss/azurerm module to 0.2.1
+Update examples to use the latest module versions
 
 Version 0.4.0 (2025-10-31)
 --------------------------
